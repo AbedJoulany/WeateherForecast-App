@@ -14,11 +14,11 @@ session and cookies were used in the app
 ![Screenshot 2023-02-04 161850](https://user-images.githubusercontent.com/59060418/216774197-9fa7dc43-f465-4e80-9b33-cba4543b4f7e.jpg)
 
 
-#login Page
+# login Page
 
 ![Screenshot 2023-02-04 161920](https://user-images.githubusercontent.com/59060418/216774209-c21aaef5-6e83-49b7-9dea-39857d302147.jpg)
 
-#adding a city to save in the database and showing weather forecast for 3 days
+# adding a city to save in the database and showing weather forecast for 3 days
 ![Screenshot 2023-02-04 164519](https://user-images.githubusercontent.com/59060418/216774243-8b71648d-403d-43ef-a625-2c8f6ed24ae4.jpg)
 
 
