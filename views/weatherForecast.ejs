@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../stylesheets/errorPageStyle.css">
+
+    <script src="javascripts/cityValidator.js"></script>
+    <script src="javascripts/apiFunctions.js"></script>
+    <script src="javascripts/FromValidator.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+
+    <div class="alert alert-light" role="alert">
+        <h3>Welcome <%= userName %></h3>
+    </div>
+    <div class="alert alert-secondary" role="alert">
+        <h1>Internet programming-Exercise 4</h1>
+        <p>please complete this form</p>
+    </div>
+    <div class="row ">
+        <div class='col-md-6'>
+            <form action="/weatherForecast/cities" method="post" class="alert alert-secondary">
+                <div class="form-row">
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="city-name">City name </label>
+                        <input type="text" class="form-control" id="city-name" name = "CityName">
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="longitude">Longitude </label>
+                        <input type="text" class="form-control" id="longitude" name = "Longitude">
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="latitude">Latitude </label>
+                        <input type="text" class="form-control" id="latitude" name = "Latitude">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" id="add-button">Add city</button>
+                <br>
+            </form>
+        </div>
+        <div class='col-md-6'>
+            <div class="alert alert-secondary" role="alert">
+                <select class="custom-select" id="cities-list">
+                    <option selected>Chose a city</option>
+                </select>
+                <br><br>
+                <button type="button" class="btn btn-primary mb-3" id="show-button">Show weather forecast</button>
+                <button type="button" class="btn btn-primary mb-3" id="del-button">remove city</button>
+                <button type="button" class="btn btn-primary mb-3" id="del-all-button">clear cities list</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="accordion">
+        <div class="card bg-light">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link " data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                        #Show 3 days forecast in picture
+                    </button>
+                </h5>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    <div id="3-days"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-light">
+            <div class="card-header" id="headingTwo">
+                <h5 class="mb-0">
+                    <button class="btn btn-link " data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                        #Show 7 days forecast in picture
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                <div class="card-body">
+                    <div id="7-days-pic"></div>
+                </div>
+            </div>
+        </div>
+        <div class="card bg-light">
+            <div class="card-header" id="headingThree">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree"
+                            aria-expanded="false" aria-controls="collapseThree">
+                        #Show 7 days forecast in table
+                    </button>
+                </h5>
+            </div>
+            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                <div class="card-body">
+                    <div id="7-days-table"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="errors-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Correct the following problems</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="error-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+
+        getCityListFromDB(event);
+
+        document.getElementById('add-button').addEventListener('click', FormValidator.validateForm);
+        document.getElementById('del-button').addEventListener('click', cityValidator.removeFromList);
+        document.getElementById('del-all-button').addEventListener('click', cityValidator.clearCitiesList);
+        document.getElementById('show-button').addEventListener('click', get3DaysPic);
+        document.getElementById('show-button').addEventListener('click', get7DaysForecast);
+        document.getElementById('show-button').addEventListener('click', get7DaysPic);
+    });
+
+</script>
+<% include partials/script %>
+</body>
+</html>
+
